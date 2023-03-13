@@ -11,9 +11,13 @@ connectDB()
 
 const importData = async () => {
     try{
-        await Users.insertMany(Admin)
-        await UserDetails.insertMany(AdminDetails)
-        console.log('success.');
+        const userResponse = await Users(Admin).save()
+
+		var userDetails = new UserDetails(AdminDetails)
+		userDetails.userID = userResponse
+        const userDetailsResponse = await userDetails.save()
+
+        console.log('success.', userResponse, userDetailsResponse);
     } catch(error) {
         console.log('error occured.', error);
     }
@@ -21,4 +25,4 @@ const importData = async () => {
 
 // importData()
 
-UserDetails.findById('640e1af4396a51cbf16e33ae').then((res) => console.log(res)).catch((err) => console.log(err))
+// UserDetails.findById('640e1af4396a51cbf16e33ae').then((res) => console.log(res)).catch((err) => console.log(err))
