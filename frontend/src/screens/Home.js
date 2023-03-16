@@ -8,7 +8,7 @@ const Home = () => {
 	const containerRef = useRef(null)
 	const signUpHandler = () => {
 		containerRef.current.classList.add("right-panel-active");
-		console.log(containerRef.current);
+		console.log(containerRef.current.classList);
 		
 	}
 	
