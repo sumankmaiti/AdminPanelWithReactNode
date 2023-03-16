@@ -42,10 +42,15 @@ const Home = () => {
 					<div className='overlay'>
 						<div className='overlay-panel overlay-left'>
 							<h1> Welcome Back! </h1>
-							<p> </p>
+							<p> Login to explore here </p>
+							<button className='ghost' id='signIn'> </button>
+						</div>
+						<div className='overlay-panel overlay-right'>
+							<h1> Hi There! </h1>
+							<p> Provide us some of your information to know you better </p>
+							<button className='ghost' id='signUp' onClick={}> Sign Up </button>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>

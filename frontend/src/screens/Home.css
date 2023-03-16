@@ -143,3 +143,8 @@ form {
 .overlay-left {
 	transform: translateX(-20%);
 }
+
+.overlay-right {
+	right: 0;
+	transform: translateX(0);
+}
