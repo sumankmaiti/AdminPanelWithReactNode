@@ -1,14 +1,22 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './Home.css'
 
 const Home = () => {
+	console.log('Home Screen called.');
 	const [user, setUser] = useState('')
 	const [password, setPassword] = useState('')
+	const containerRef = useRef(null)
+	const signUpHandler = () => {
+		containerRef.current.classList.add("right-panel-active");
+		console.log(containerRef.current);
+		
+	}
+	
 
 	return(
 		<div>
 			<h2> Employee Management </h2>
-			<div className='container' id='container'>
+			<div className='container' id='container' ref={containerRef}>
 				<div className='form-container sign-up-container'>
 					<form action='#'>
 						<h1> Create Account </h1>
@@ -48,7 +56,7 @@ const Home = () => {
 						<div className='overlay-panel overlay-right'>
 							<h1> Hi There! </h1>
 							<p> Provide us some of your information to know you better </p>
-							<button className='ghost' id='signUp' onClick={}> Sign Up </button>
+							<button className='ghost' id='signUp' onClick={signUpHandler}> Sign Up </button>
 						</div>
 					</div>
 				</div>
