@@ -6,13 +6,17 @@ const Home = () => {
 	const [user, setUser] = useState('')
 	const [password, setPassword] = useState('')
 	const containerRef = useRef(null)
+	
 	const signUpHandler = () => {
 		containerRef.current.classList.add("right-panel-active");
 		console.log(containerRef.current.classList);
 		
 	}
-	
 
+	const signInHandler = () => {
+		containerRef.current.classList.remove("right-panel-active")
+	}
+	
 	return(
 		<div>
 			<h2> Employee Management </h2>
@@ -20,7 +24,10 @@ const Home = () => {
 				<div className='form-container sign-up-container'>
 					<form action='#'>
 						<h1> Create Account </h1>
-						Registration inputs
+						<input
+						type='text'
+						name='signUpId'
+						id='signUpId' />
 					</form>
 				</div>
 
@@ -51,7 +58,7 @@ const Home = () => {
 						<div className='overlay-panel overlay-left'>
 							<h1> Welcome Back! </h1>
 							<p> Login to explore here </p>
-							<button className='ghost' id='signIn'> </button>
+							<button className='ghost' id='signIn' onClick={signInHandler}> Sign In </button>
 						</div>
 						<div className='overlay-panel overlay-right'>
 							<h1> Hi There! </h1>
