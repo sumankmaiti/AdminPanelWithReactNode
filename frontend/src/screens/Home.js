@@ -1,21 +1,61 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
+import axios from 'axios'
+
 import './Home.css'
 
 const Home = () => {
 	console.log('Home Screen called.');
-	const [user, setUser] = useState('')
-	const [password, setPassword] = useState('')
+	// const [phoneNo, setPhone] = useState('')
+	// const [password, setPassword] = useState('')
 	const containerRef = useRef(null)
+
+	const phoneRef = useRef(null)
+	const emailRef = useRef(null)
+	const passwordRef = useRef(null)
+	const firstNameRef = useRef(null)
+	const lastNameRef = useRef(null)
+	const addressRef = useRef(null)
 	
-	const signUpHandler = () => {
-		containerRef.current.classList.add("right-panel-active");
-		console.log(containerRef.current.classList);
-		
+	const signUpStyleHandler = () => {
+		containerRef.current.classList.add("right-panel-active");		
 	}
 
-	const signInHandler = () => {
+	const signInStyleHandler = () => {
 		containerRef.current.classList.remove("right-panel-active")
 	}
+
+	const signUpHandler = () => {
+		const data = {
+			phone: phoneRef.current.value,
+			email: emailRef.current.value,
+			password: passwordRef.current.value,
+			fname: firstNameRef.current.value,
+			lname: lastNameRef.current.value,
+			address: addressRef.current.value
+		}
+
+		console.log(data);
+
+		axios.post('api/for/insert', data)
+		.then((res) => console.log(res))
+		.catch((res) => console.log(res))
+	} 
+
+	const loginHandler = (e) => {
+		e.preventDefault()
+		
+		const data = {
+			phone: phoneRef.current.value,
+			email: emailRef.current.value,
+			password: passwordRef.current.value,
+		}
+
+		console.log(data);
+
+		axios.get('api/for/validate', data)
+		.then((res) => console.log(res))
+		.catch((res) => console.log(res))
+	} 
 	
 	return(
 		<div>
@@ -26,32 +66,68 @@ const Home = () => {
 						<h1> Create Account </h1>
 						<input
 						type='text'
+						maxLength="10"
 						name='signUpId'
 						id='signUpId'
-						placeholder='Phone Number or Email'
-						onChange={(e) => setUser(e.target.value)}
-						value={user} />
+						placeholder='Phone Number'
+						ref={phoneRef} />
+
+						<input 
+						type='email'
+						name='signupEmail'
+						id='signupEmail'
+						placeholder='Email Id'
+						ref={emailRef} />
+
+						<input 
+						type='password'
+						name='signupPassword'
+						id='signupPassword'
+						placeholder='Password'
+						ref={passwordRef} />
+
+						<input 
+						type='text'
+						name='signupFname'
+						id='signupFname'
+						placeholder='First Name'
+						ref={firstNameRef} /> 
+						
+						<input 
+						type='text'
+						name='signupLname'
+						id='signupLname'
+						placeholder='Last Name'
+						ref={lastNameRef} /> 
+						
+						<input 
+						type='text'
+						name='signupAddress'
+						id='signupAddress'
+						placeholder='Address'
+						ref={addressRef} />
+
+						<button type='submit' id='signUp' > Create Account </button>
 					</form>
 				</div>
 
 				<div className='form-container sign-in-container'>
-					<form action='#'>
+					<form onSubmit={loginHandler}>
 						<h1> Sign in </h1>
 						<input 
 						type='text'
 						name='loginId' 
 						id='loginId' 
-						value={user} 
-						onChange={(e) => setUser(e.target.value)} 
+						ref={phoneRef} 
 						placeholder='phone number or email'/>
 
 						<input
 						type='password'
 						name='password'
 						id='password'
-						value={password}
+						ref={passwordRef}
 						placeholder='Password'
-						onChange={(e) => setPassword(e.target.value)} />
+						 />
 
 						<button type='submit' id='submit' > Login </button>
 					</form>
@@ -61,12 +137,12 @@ const Home = () => {
 						<div className='overlay-panel overlay-left'>
 							<h1> Welcome Back! </h1>
 							<p> Login to explore here </p>
-							<button className='ghost' id='signIn' onClick={signInHandler}> Sign In </button>
+							<button className='ghost' id='signIn' onClick={signInStyleHandler}> Sign In </button>
 						</div>
 						<div className='overlay-panel overlay-right'>
 							<h1> Hi There! </h1>
 							<p> Provide us some of your information to know you better </p>
-							<button className='ghost' id='signUp' onClick={signUpHandler}> Sign Up </button>
+							<button className='ghost' id='signUp' onClick={signUpStyleHandler}> Sign Up </button>
 						</div>
 					</div>
 				</div>
