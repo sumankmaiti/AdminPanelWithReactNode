@@ -27,7 +27,10 @@ const Home = () => {
 						<input
 						type='text'
 						name='signUpId'
-						id='signUpId' />
+						id='signUpId'
+						placeholder='Phone Number or Email'
+						onChange={(e) => setUser(e.target.value)}
+						value={user} />
 					</form>
 				</div>
 
