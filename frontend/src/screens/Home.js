@@ -36,7 +36,7 @@ const Home = () => {
 
 		console.log(data);
 
-		axios.post('api/for/insert', data)
+		axios.post('/api/for/insert', data)
 		.then((res) => console.log(res))
 		.catch((res) => console.log(res))
 	} 
@@ -46,13 +46,15 @@ const Home = () => {
 		
 		const data = {
 			phone: phoneRef.current.value,
-			email: emailRef.current.value,
 			password: passwordRef.current.value,
 		}
 
 		console.log(data);
-
-		axios.get('api/for/validate', data)
+		axios.post('http://0.0.0.0:5000/api/for/validate', data, { headers: {
+			'Content-Type': 'application/json;charset=UTF-8',
+			"Access-Control-Allow-Origin": "*"
+			}
+		})
 		.then((res) => console.log(res))
 		.catch((res) => console.log(res))
 	} 
