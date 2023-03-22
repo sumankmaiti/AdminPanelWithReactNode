@@ -1,6 +1,8 @@
-const validateUser = async (req, res) => {
+const validateUser = (req, res) => {
 	try {
-		console.log('validate user controller called', req.data);
+		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+		res.json({name:'suman'})
+		console.log('validate user controller called', req.body);
 	} catch (error) {
 		console.log('validate user controller ', error);
 	}

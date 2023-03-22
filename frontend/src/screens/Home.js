@@ -44,17 +44,16 @@ const Home = () => {
 	const loginHandler = (e) => {
 		e.preventDefault()
 		
-		const data = {
+		var data = {
 			phone: phoneRef.current.value,
 			password: passwordRef.current.value,
 		}
 
 		console.log(data);
-		axios.post('http://0.0.0.0:5000/api/for/validate', data, { headers: {
-			'Content-Type': 'application/json;charset=UTF-8',
-			"Access-Control-Allow-Origin": "*"
-			}
-		})
+		axios({
+			method: 'post',
+			url: 'http://localhost:5000/api/for/validate',
+			body: data})
 		.then((res) => console.log(res))
 		.catch((res) => console.log(res))
 	} 
