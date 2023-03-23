@@ -1,8 +1,8 @@
 const validateUser = (req, res) => {
 	try {
 		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
-		res.json({name:'suman'})
 		console.log('validate user controller called', req.body);
+		res.json('Hello')
 	} catch (error) {
 		console.log('validate user controller ', error);
 	}

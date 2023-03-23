@@ -44,21 +44,19 @@ const Home = () => {
 	const loginHandler = (e) => {
 		e.preventDefault()
 		
-		var data = {
-			phone: phoneRef.current.value,
-			password: passwordRef.current.value,
-		}
+		var phone = phoneRef.current.value
+		var	password = passwordRef.current.value
 
-		console.log(data);
+		console.log(phone, password);
 		axios({
 			method: 'post',
 			url: 'http://localhost:5000/api/for/validate',
-			body: data})
-		.then((res) => console.log(res))
-		.catch((res) => console.log(res))
-	} 
+			headers: {'Access-Control-Allow-Origin': 'http://localhost:3000'},
+			body: {phone, password}
+		})
+	}
 	
-	return(
+	return (
 		<div>
 			<h2> Employee Management </h2>
 			<div className='container' id='container' ref={containerRef}>
