@@ -44,16 +44,11 @@ const Home = () => {
 	const loginHandler = (e) => {
 		e.preventDefault()
 		
-		var phone = phoneRef.current.value
+		var id = phoneRef.current.value
 		var	password = passwordRef.current.value
 
-		console.log(phone, password);
-		axios({
-			method: 'post',
-			url: 'http://localhost:5000/api/for/validate',
-			headers: {'Access-Control-Allow-Origin': 'http://localhost:3000'},
-			body: {phone, password}
-		})
+		console.log('home screen login handler: ', id, password);
+		axios.post('http://localhost:4000/api/for/validate', { id, password })
 	}
 	
 	return (
