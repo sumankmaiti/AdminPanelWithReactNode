@@ -14,7 +14,7 @@ const importData = async () => {
         const userResponse = await Users(Admin).save()
 
 		var userDetails = new UserDetails(AdminDetails)
-		userDetails.userID = userResponse
+		userDetails._id = userResponse._id
         const userDetailsResponse = await userDetails.save()
 
         console.log('success.', userResponse, userDetailsResponse);
@@ -23,6 +23,6 @@ const importData = async () => {
     }
 }
 
-// importData()
+importData()
 
 // UserDetails.findById('640e1af4396a51cbf16e33ae').then((res) => console.log(res)).catch((err) => console.log(err))

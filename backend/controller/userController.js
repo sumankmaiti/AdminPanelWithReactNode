@@ -1,4 +1,5 @@
 const Users = require('../model/Users');
+const UserDetails = require('../model/UserDetails')
 
 const validateUser = async (req, res) => {
 	try {
@@ -6,14 +7,20 @@ const validateUser = async (req, res) => {
 		let { id, password } = req.body
 
 		if (id.includes("@")) {
-			var existingUser = await Users.find({email: id})
+			var existingUser = await Users.findOne({email: id})
 		} else {
-			existingUser = await Users.find({phone: id})
+			existingUser = await Users.findOne({phone: id})
 		}
 
-		console.log('validate user controller called', id, password, existingUser);
+		if(password == existingUser.password) {
+			const info = await UserDetails.findOne({ _id: existingUser._id })
+			const reply = {existingUser.}
+			res.json(reply)
+		}
+		else {
+			res.json({message: 'Wrong Password.'})
+		}
 
-		res.json('Hello')
 	} catch (error) {
 		console.log('validate user controller ', error);
 	}

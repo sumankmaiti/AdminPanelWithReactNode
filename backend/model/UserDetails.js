@@ -3,7 +3,7 @@ const Users = require('./Users')
 
 const userDetailsSchema = mongoose.Schema(
     {
-        userID: [{type: mongoose.Schema.Types.ObjectId, ref: Users}],
+        // _id: {type: mongoose.Schema.Types.ObjectId, ref: Users},
         fname: {type: String, required: true},
         lname: {type: String, required: true},
         address: {type: String, required: false}
