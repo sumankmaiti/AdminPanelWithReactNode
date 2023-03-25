@@ -8,14 +8,22 @@ const validateUser = async (req, res) => {
 
 		if (id.includes("@")) {
 			var existingUser = await Users.findOne({email: id})
+
 		} else {
 			existingUser = await Users.findOne({phone: id})
 		}
 
 		if(password == existingUser.password) {
 			const info = await UserDetails.findOne({ _id: existingUser._id })
-			const reply = {existingUser.}
-			res.json(reply)
+			const { _id, phone, email, isAdmin } = existingUser
+			const { fname, lname, address } = info
+
+			const reply = {_id, phone, email, isAdmin, fname, lname, address}
+			res.json({info: reply})
+
+			if (isAdmin) {
+				
+			}
 		}
 		else {
 			res.json({message: 'Wrong Password.'})
