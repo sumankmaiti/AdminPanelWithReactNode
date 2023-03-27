@@ -67,6 +67,12 @@ form {
 	text-align: center;
 }
 
+label {
+	color: #FF416C;
+	padding: 10px;
+}
+
+
 .container {
 	width: 768px;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -76,6 +82,7 @@ form {
 	overflow: hidden;
 	max-width: 100%;
 	min-height: 480px;
+	left: 25%;
 }
 
 .form-container {

@@ -1,12 +1,13 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
 import './Home.css'
 
 const Home = () => {
 	console.log('Home Screen called.');
-	// const [phoneNo, setPhone] = useState('')
-	// const [password, setPassword] = useState('')
+	const [data, setData] = useState([])
+	const [err, setErr] = useState('')
+
 	const containerRef = useRef(null)
 
 	const phoneRef = useRef(null)
@@ -23,6 +24,10 @@ const Home = () => {
 	const signInStyleHandler = () => {
 		containerRef.current.classList.remove("right-panel-active")
 	}
+
+	useEffect(()=> {
+		console.log(data, err);
+	},[data, err])
 
 	const signUpHandler = () => {
 		const data = {
@@ -49,7 +54,17 @@ const Home = () => {
 
 		console.log('home screen login handler: ', id, password);
 		axios.post('http://localhost:4000/api/for/validate', { id, password })
-		.then(res => console.log(res))
+		.then(res => {
+			if (res.data.error){
+				setErr(res.data.error)
+				setData([])
+			}
+			else {
+				setData(res.data.info)
+				setErr('')
+			}
+		}
+			)
 		.catch(error => console.log(error))
 	}
 	
@@ -126,6 +141,7 @@ const Home = () => {
 						 />
 
 						<button type='submit' id='submit' > Login </button>
+						<label> {err} </label>
 					</form>
 				</div>
 				<div className='overlay-container'>
