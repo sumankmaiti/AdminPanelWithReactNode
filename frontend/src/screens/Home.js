@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import {useDispatch} from 'react-redux'
-import axios from 'axios'
 
 import './Home.css'
 import {authenticateUser} from './redux/actions/authenticateUser'
@@ -25,23 +24,6 @@ const Home = () => {
 	const signInStyleHandler = () => {
 		containerRef.current.classList.remove("right-panel-active")
 	}
-
-	const signUpHandler = () => {
-		const data = {
-			phone: phoneRef.current.value,
-			email: emailRef.current.value,
-			password: passwordRef.current.value,
-			fname: firstNameRef.current.value,
-			lname: lastNameRef.current.value,
-			address: addressRef.current.value
-		}
-
-		console.log(data);
-
-		axios.post('/api/for/insert', data)
-		.then((res) => console.log(res))
-		.catch((res) => console.log(res))
-	} 
 
 	const loginHandler = (e) => {
 		e.preventDefault()
