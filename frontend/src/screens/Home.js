@@ -26,10 +26,6 @@ const Home = () => {
 		containerRef.current.classList.remove("right-panel-active")
 	}
 
-	useEffect(()=> {
-		console.log(data, err);
-	},[data, err])
-
 	const signUpHandler = () => {
 		const data = {
 			phone: phoneRef.current.value,
@@ -54,6 +50,8 @@ const Home = () => {
 		var	password = passwordRef.current.value
 
 		console.log('home screen login handler: ', id, password);
+		dispatch(authenticateUser(id, password))
+		
 	}
 	
 	return (
@@ -129,7 +127,7 @@ const Home = () => {
 						 />
 
 						<button type='submit' id='submit' > Login </button>
-						<label> {err} </label>
+						<label> </label>
 					</form>
 				</div>
 				<div className='overlay-container'>
