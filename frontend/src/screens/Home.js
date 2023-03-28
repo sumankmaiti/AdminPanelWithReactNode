@@ -1,12 +1,14 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import {useDispatch} from 'react-redux'
 import axios from 'axios'
 
 import './Home.css'
+import {authenticateUser} from './redux/actions/authenticateUser'
 
 const Home = () => {
 	console.log('Home Screen called.');
-	// const [phoneNo, setPhone] = useState('')
-	// const [password, setPassword] = useState('')
+	const dispatch = useDispatch()
+	
 	const containerRef = useRef(null)
 
 	const phoneRef = useRef(null)
@@ -23,6 +25,10 @@ const Home = () => {
 	const signInStyleHandler = () => {
 		containerRef.current.classList.remove("right-panel-active")
 	}
+
+	useEffect(()=> {
+		console.log(data, err);
+	},[data, err])
 
 	const signUpHandler = () => {
 		const data = {
@@ -48,9 +54,6 @@ const Home = () => {
 		var	password = passwordRef.current.value
 
 		console.log('home screen login handler: ', id, password);
-		axios.post('http://localhost:4000/api/for/validate', { id, password })
-		.then(res => console.log(res.response.data))
-		.catch(error => console.log(error.response.data))
 	}
 	
 	return (
@@ -126,6 +129,7 @@ const Home = () => {
 						 />
 
 						<button type='submit' id='submit' > Login </button>
+						<label> {err} </label>
 					</form>
 				</div>
 				<div className='overlay-container'>

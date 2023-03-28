@@ -2,28 +2,37 @@ const Users = require('../model/Users');
 const UserDetails = require('../model/UserDetails')
 
 const validateUser = async (req, res) => {
+	const sendResponse = (obj) => {
+		res.json(obj)
+	}
+	
 	try {
 		// res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
 		let { id, password } = req.body
-
+	
 		if (id.includes("@")) {
 			var existingUser = await Users.findOne({email: id})
 
 		} else {
-			existingUser = await Users.findOne({phone: id})
+			try {
+				existingUser = await Users.findOne({phone: id})
+			}
+			catch(error) {
+				sendResponse({error: 'Invalid Format. Use email or phone number'})
+				return
+			}
 		}
 
-		if(password == existingUser.password) {
-			const userList = await UserDetails.find({})
-			// const { _id, phone, email, isAdmin } = existingUser
-			// const { fname, lname, address } = info
+		if(existingUser && (password == existingUser.password)) {
+			const allUsers = await UserDetails.find({})
+			const { _id, phone, email, isAdmin } = existingUser
+			const { fname, lname, address } = info
 
-			// const reply = {_id, phone, email, isAdmin, fname, lname, address}
-			res.json({userList})
-
+			const reply = {_id, phone, email, isAdmin, fname, lname, address}
+			res.json({info: [reply]})
 		}
 		else {
-			res.json('Wrong Password.')
+			sendResponse({error: 'Invalid Username or Password.'})
 		}
 
 	} catch (error) {
