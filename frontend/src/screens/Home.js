@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import {useDispatch} from 'react-redux'
 
 import './Home.css'
-import {authenticateUser} from './redux/actions/authenticateUser'
+import {authenticateUser} from '../redux/actions/authenticateUser'
 
 const Home = () => {
 	console.log('Home Screen called.');

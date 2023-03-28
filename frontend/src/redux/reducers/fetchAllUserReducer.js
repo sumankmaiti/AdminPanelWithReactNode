@@ -5,7 +5,7 @@ const initialState = {
 	users: [],
 	error: ''
 }
-const fetchAllUserReducer = (state = initialState, action) => {
+export const fetchAllUserReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case actionTypes.FETCH_USERS_REQUESTED:
 			return {
@@ -24,5 +24,3 @@ const fetchAllUserReducer = (state = initialState, action) => {
 	}
 
 }
-
-export default fetchAllUserReducer
