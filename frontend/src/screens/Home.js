@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import {useDispatch} from 'react-redux'
 import axios from 'axios'
 
 import './Home.css'
+import {authenticateUser} from './redux/actions/authenticateUser'
 
 const Home = () => {
 	console.log('Home Screen called.');
-	const [data, setData] = useState([])
-	const [err, setErr] = useState('')
-
+	const dispatch = useDispatch()
+	
 	const containerRef = useRef(null)
 
 	const phoneRef = useRef(null)
@@ -53,20 +54,8 @@ const Home = () => {
 		var	password = passwordRef.current.value
 
 		console.log('home screen login handler: ', id, password);
-		axios.post('http://localhost:4000/api/for/validate', { id, password })
-		.then(res => {
-			if (res.data.error){
-				setErr(res.data.error)
-				setData([])
-			}
-			else {
-				setData(res.data.info)
-				setErr('')
-			}
-		}
-			)
-		.catch(error => console.log(error))
-	}
+
+		authenticateUser(id, password)
 	
 	return (
 		<div>

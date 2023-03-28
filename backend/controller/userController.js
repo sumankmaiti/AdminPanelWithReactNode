@@ -24,7 +24,7 @@ const validateUser = async (req, res) => {
 		}
 
 		if(existingUser && (password == existingUser.password)) {
-			const info = await UserDetails.findOne({ _id: existingUser._id })
+			const allUsers = await UserDetails.find({})
 			const { _id, phone, email, isAdmin } = existingUser
 			const { fname, lname, address } = info
 
