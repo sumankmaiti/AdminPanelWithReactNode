@@ -49,8 +49,8 @@ const Home = () => {
 
 		console.log('home screen login handler: ', id, password);
 		axios.post('http://localhost:4000/api/for/validate', { id, password })
-		.then(res => console.log(res))
-		.catch(error => console.log(error))
+		.then(res => console.log(res.response.data))
+		.catch(error => console.log(error.response.data))
 	}
 	
 	return (
