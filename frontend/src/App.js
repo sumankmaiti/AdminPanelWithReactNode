@@ -1,14 +1,14 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 import Home from './screens/Home'
-import Register from './screens/Register'
+import View from './screens/View'
 
 function App() {
   return (
 		<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<Home />} />
-				<Route path='/register' element={<Register />} />
+				<Route path='/view' element={<View />} />
 			</Routes>
 		</BrowserRouter>
 	)

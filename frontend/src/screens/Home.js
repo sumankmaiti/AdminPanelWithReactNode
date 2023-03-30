@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import './Home.css'
 import {authenticateUser} from '../redux/actions/authenticateUser'
@@ -7,20 +8,21 @@ import {authenticateUser} from '../redux/actions/authenticateUser'
 const Home = () => {
 	console.log('Home Screen called.');
 	const dispatch = useDispatch()
+	const nevigate = useNavigate()
 	
 	const phoneRef = useRef(null)
 	const passwordRef = useRef(null)
 
-	const {loading, users, error} = useSelector(state => state.allUsers)
+	const {error} = useSelector(state => state.allUsers)
 
-	const loginHandler = (e) => {
+	const loginHandler = async (e) => {
 		e.preventDefault()
 		
 		var id = phoneRef.current.value
 		var	password = passwordRef.current.value
 
 		console.log('home screen login handler: ', id, password);
-		dispatch(authenticateUser(id, password))
+		await dispatch(authenticateUser(id, password))
 	}
 
 
@@ -44,9 +46,9 @@ const Home = () => {
 					ref={passwordRef}
 					placeholder='Password' />
 
-					<button type='submit' id='submit' > Login </button>
-
-					{error ? <label> {error} </label>: <label> {JSON.stringify(users)} </label>}
+					<button type='submit' id='submit'> Login </button>
+					
+					<label> {error} </label>
 				</form>
 			</div>
 		</div>
