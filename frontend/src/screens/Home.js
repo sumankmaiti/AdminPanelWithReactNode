@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -13,18 +13,23 @@ const Home = () => {
 	const phoneRef = useRef(null)
 	const passwordRef = useRef(null)
 
-	const {error} = useSelector(state => state.allUsers)
-
-	const loginHandler = async (e) => {
+	const loginHandler = (e) => {
 		e.preventDefault()
 		
 		var id = phoneRef.current.value
 		var	password = passwordRef.current.value
 
 		console.log('home screen login handler: ', id, password);
-		await dispatch(authenticateUser(id, password))
+		dispatch(authenticateUser(id, password))
 	}
 
+	const {error, users} = useSelector(state => state.allUsers)
+
+	if(users.length >  0) {
+		nevigate('/view')
+	}
+
+	console.log(error, users);
 
 	return (
 		<div>
@@ -47,7 +52,7 @@ const Home = () => {
 					placeholder='Password' />
 
 					<button type='submit' id='submit'> Login </button>
-					
+					<br/>
 					<label> {error} </label>
 				</form>
 			</div>
