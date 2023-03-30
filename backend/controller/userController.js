@@ -8,14 +8,15 @@ const validateUser = async (req, res) => {
 	
 	try {
 		// res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
-		let { id, password } = req.body
+		let { userid, password } = req.body
+		console.log(userid, password);
 	
-		if (id.includes("@")) {
-			var existingUser = await Users.findOne({email: id})
+		if (userid.includes("@")) {
+			var existingUser = await Users.findOne({email: userid})
 
 		} else {
 			try {
-				existingUser = await Users.findOne({phone: id})
+				existingUser = await Users.findOne({phone: userid})
 			}
 			catch(error) {
 				sendResponse({error: 'Invalid Format. Use email or phone number'})
@@ -25,11 +26,8 @@ const validateUser = async (req, res) => {
 
 		if(existingUser && (password == existingUser.password)) {
 			const allUsers = await UserDetails.find({})
-			const { _id, phone, email, isAdmin } = existingUser
-			const { fname, lname, address } = info
-
-			const reply = {_id, phone, email, isAdmin, fname, lname, address}
-			res.json({info: [reply]})
+			console.log(allUsers);
+			res.json({info: allUsers})
 		}
 		else {
 			sendResponse({error: 'Invalid Username or Password.'})

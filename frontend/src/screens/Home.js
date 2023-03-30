@@ -46,7 +46,7 @@ const Home = () => {
 
 					<button type='submit' id='submit' > Login </button>
 
-					{error ? <label> {error} </label>: null}
+					{error ? <label> {error} </label>: <label> {JSON.stringify(users)} </label>}
 				</form>
 			</div>
 		</div>

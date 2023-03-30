@@ -15,6 +15,7 @@ export const authenticateUser = (userid, password) => (dispatch) => {
 			})
 		}
 		else {
+			console.log(response.data.info)
 			dispatch({
 				type: actionTypes.FETCH_USERS_SUCCESS,
 				payload:response.data.info

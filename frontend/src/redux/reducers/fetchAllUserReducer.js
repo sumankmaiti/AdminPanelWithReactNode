@@ -13,7 +13,7 @@ export const fetchAllUserReducer = (state = initialState, action) => {
 			}
 		case actionTypes.FETCH_USERS_SUCCESS:
 			return {
-				...state, loading: false, users: action.payload
+				...state, loading: false, users: action.payload, error: ''
 			}
 		case actionTypes.FETCH_USERS_FAILED:
 			return {
