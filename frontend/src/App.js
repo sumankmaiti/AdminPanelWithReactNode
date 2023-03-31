@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
-import Home from './screens/Home'
-import View from './screens/View'
+import Home from './pages/Login/Login'
+import View from './pages/View/View'
 
 function App() {
   return (

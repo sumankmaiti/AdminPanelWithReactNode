@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useRef } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import './Home.css'
-import {authenticateUser} from '../redux/actions/authenticateUser'
+import './Login.scss'
+import { authenticateUser } from '../../redux/actions/authenticateUser'
 
 const Home = () => {
 	console.log('Home Screen called.');
@@ -26,10 +26,12 @@ const Home = () => {
 	const {error, users} = useSelector(state => state.allUsers)
 
 	if(users.length >  0) {
-		nevigate('/view')
+		setTimeout(() => {
+			nevigate('/view')
+		}, 1000)
 	}
 
-	console.log(error, users);
+	console.log('current status', error, users);
 
 	return (
 		<div>
